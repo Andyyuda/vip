@@ -1,42 +1,29 @@
 #!/bin/bash
-function sship(){
-#LIMITSSH
-mulog=$(cekssh)
-data=( `ls /etc/kyt/limit/ssh/ip`);
-#Decrypted By YADDY D PHREAKER
-    for user in "${data[@]}"
-do
-iplimit=$(cat /etc/kyt/limit/ssh/ip/$user)
-cekcek=$(echo -e "$mulog" | grep $user | wc -l);
-if [[ $cekcek -gt $iplimit ]]; then
-getent passwd ${user}  >/dev/null 2>&1
-userdel -f ${user}  >/dev/null 2>&1
-systemctl restart sshd >/dev/null 2>&1
-systemctl restart ws >/dev/null 2>&1
-nais=3
-echo -e "$waktu\nRemoved User: $user Login: $cekcek IP Max: $ip IP \n" >> /etc/kyt/log/ssh/ssh.log
-else
-echo > /dev/null
-fi
-sleep 30
-done
-if [[ $nais -gt 1 ]]; then
-send_log
-else
- echo ""
-        fi
-        sleep 0.1
-    done
+
+function send_log(){
+CHATID=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 3)
+KEY=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 2)
+TIME="10"
+URL="https://api.telegram.org/bot$KEY/sendMessage"
+TEXT="
+<code>────────────────────</code>
+<b>⚠️ NOTIFICATIONS MULTI LOGIN ⚠️</b>
+<code>────────────────────</code>
+<code>Username  : </code><code>$user</code>
+<code>Limit Ip    : </code><code>$data</code>
+<code>────────────────────</code>
+"
+curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
 }
 function vmip(){
 #LIMITVMESSIP
 echo -n > /var/log/xray/access.log
 sleep 440
-data=( `ls /etc/kyt/limit/vmess/ip`);
+data=( `ls /etc/klmpk/limit/vmess/ip`);
 #Decrypted By YADDY D PHREAKER
     for user in "${data[@]}"
     do
-        iplimit=$(cat /etc/kyt/limit/vmess/ip/$user)
+        iplimit=$(cat /etc/klmpk/limit/vmess/ip/$user)
         ehh=$(cat /var/log/xray/access.log | grep "$user" | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | sort | uniq);
         cekcek=$(echo -e "$ehh" | wc -l);
         if [[ $cekcek -gt $iplimit ]]; then
@@ -45,7 +32,7 @@ data=( `ls /etc/kyt/limit/vmess/ip`);
                   sed -i "/^### $user $exp/d" /etc/vmess/.vmess.db
                   systemctl restart xray >> /dev/null 2>&1
                   jum2=$(cat /tmp/ipvmess.txt | wc -l)
-                  rm -rf /etc/kyt/limit/vmess/ip/$user
+                  rm -rf /etc/klmpk/limit/vmess/ip/$user
                   send_log
                 else
             echo ""
@@ -57,11 +44,11 @@ function vlip(){
 #LIMITVLESSIP
 echo -n > /var/log/xray/access.log
 sleep 440
-data=( `ls /etc/kyt/limit/vless/ip`);
+data=( `ls /etc/klmpk/limit/vless/ip`);
 #Decrypted By YADDY D PHREAKER
     for user in "${data[@]}"
     do
-        iplimit=$(cat /etc/kyt/limit/vless/ip/$user)
+        iplimit=$(cat /etc/klmpk/limit/vless/ip/$user)
         ehh=$(cat /var/log/xray/access.log | grep "$user" | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | sort | uniq);
         cekcek=$(echo -e "$ehh" | wc -l);
         if [[ $cekcek -gt $iplimit ]]; then
@@ -70,7 +57,7 @@ data=( `ls /etc/kyt/limit/vless/ip`);
                   sed -i "/^### $user $exp/d" /etc/vless/.vless.db
                   systemctl restart xray >> /dev/null 2>&1
                   jum2=$(cat /tmp/ipvless.txt | wc -l)
-                  rm -rf /etc/kyt/limit/vless/ip/$user
+                  rm -rf /etc/klmpk/limit/vless/ip/$user
                   send_log
                 else
             echo ""
@@ -82,11 +69,11 @@ function trip(){
 #LIMITIPTROJAN
 echo -n > /var/log/xray/access.log
 sleep 440
-data=( `ls /etc/kyt/limit/trojan/ip`);
+data=( `ls /etc/klmpk/limit/trojan/ip`);
 #Decrypted By YADDY D PHREAKER
     for user in "${data[@]}"
     do
-        iplimit=$(cat /etc/kyt/limit/trojan/ip/$user)
+        iplimit=$(cat /etc/klmpk/limit/trojan/ip/$user)
         ehh=$(cat /var/log/xray/access.log | grep "$user" | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | sort | uniq);
         cekcek=$(echo -e "$ehh" | wc -l);
         if [[ $cekcek -gt $iplimit ]]; then
@@ -95,7 +82,7 @@ data=( `ls /etc/kyt/limit/trojan/ip`);
                   sed -i "/^### $user $exp/d" /etc/trojan/.trojan.db
                   systemctl restart xray >> /dev/null 2>&1
                   jum2=$(cat /tmp/iptrojan.txt | wc -l)
-                  rm -rf /etc/kyt/limit/trojan/ip/$user
+                  rm -rf /etc/klmpk/limit/trojan/ip/$user
                   send_log
                 else
             echo ""
@@ -104,8 +91,6 @@ data=( `ls /etc/kyt/limit/trojan/ip`);
     done
 }
 
-if [[ ${1} == "sship" ]]; then
-ssh
 if [[ ${1} == "vmip" ]]; then
 vmip
 elif [[ ${1} == "vlip" ]]; then
