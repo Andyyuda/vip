@@ -1,7 +1,7 @@
 
 
 ### INSTALL SCRIPT 
-<pre><code>apt install -y && apt update -y && apt upgrade -y && apt install lolcat -y && gem install lolcat && wget https://raw.githubusercontent.com/myvpn1/vip/main/klmpk.sh && chmod +x klmpk.sh && ./klmpk.sh
+<pre><code>apt install -y && apt update -y && apt upgrade -y && apt install lolcat -y && gem install lolcat && wget https://raw.githubusercontent.com/Andyyuda/vip/main/klmpk.sh && chmod +x klmpk.sh && ./klmpk.sh
 </code></pre>
 
 ### PERINTAH UPDATE 
