@@ -1,8 +1,5 @@
     #!/bin/bash
-    apt update -y
-    apt upgrade -y
     
-    # Set data server dan tanggal saat ini
     export HOME=/root
     dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
     biji=$(date +"%Y-%m-%d" -d "$dateFromServer")
@@ -10,7 +7,6 @@
     date_list=$(date +"%Y-%m-%d" -d "$data_server")
     ipsaya=$(curl -sS ipv4.icanhazip.com)
 
-    # Detail GitHub
     TOKENGH="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"
     REPO3="https://github.com/Andyyuda/izin.git"
     EMAIL="andyyuda51@gmail.com"
