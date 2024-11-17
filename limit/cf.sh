@@ -3,7 +3,7 @@ MYIP=$(wget -qO- icanhazip.com)
 apt install jq curl -y
 
 # Domain utama yang ditetapkan
-DOMAIN=klmpk.systems
+DOMAIN=klmpk.my.id
 
 # Membuat subdomain secara acak dengan domain utama
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c5)
@@ -11,7 +11,7 @@ dns=${sub}.$DOMAIN
 
 # Kredensial Cloudflare
 CF_ID=andyyuda41@gmail.com
-CF_KEY=44ca6e372a82e9ca0d4b1f269302ebabea0f2
+CF_KEY=9d25535086484fb695ab64a70a70532a32fd4
 
 set -euo pipefail
 IP=$(wget -qO- icanhazip.com)
